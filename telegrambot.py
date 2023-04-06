@@ -20,4 +20,4 @@ async def start_handler(message: aiogram.types.Message):
     )
 
 
-executor.start_polling()
+executor.start_polling(dp)
