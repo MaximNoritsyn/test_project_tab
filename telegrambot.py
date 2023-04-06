@@ -1,11 +1,6 @@
 import aiogram
-import os
-from dotenv import load_dotenv
 from aiogram.utils import executor
-
-load_dotenv()
-
-Telegram_token = os.environ.get('Telegram_token')
+from settings import Telegram_token
 
 bot = aiogram.Bot(token=Telegram_token)
 
