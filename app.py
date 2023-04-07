@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, request, abort
-from settings import Telegram_bot_name
+from flask import Flask, render_template, redirect, request, abort, Response
+from settings import Telegram_bot_name, SECRET_KEY, ALGORITHM
 from database_connector import DatabaseConnector
+import jwt
 
 database = DatabaseConnector()
 
@@ -12,7 +13,7 @@ def index_page():
     return render_template('index.html', telegram_bot_name=Telegram_bot_name)
 
 
-@app.route('/auth', methods=['GET'])
+@app.route('/auth')
 def auth():
     id = request.args.get('id')
     first_name = request.args.get('first_name')
@@ -38,6 +39,27 @@ def auth():
             'hash': hash
         }
         database.users.insert_one(user)
+
+    access_token = jwt.encode({'telegram_id': id}, SECRET_KEY, algorithm=ALGORITHM)
+    response = redirect('/profile')
+    response.set_cookie(key="access_token", value=access_token, httponly=True)
+    return response
+
+
+@app.route('/profile')
+def profile():
+    access_token = request.cookies.get("access_token")
+    telegram_id = None
+    if access_token:
+        try:
+            telegram_id = jwt.decode(access_token, SECRET_KEY, algorithms=[ALGORITHM]).get('telegram_id')
+        except:
+            abort(401)
+    else:
+        abort(401)
+    user = database.users.find_one({'telegram_id': telegram_id})
+    if not user:
+        abort(401)
 
     return render_template('profile.html', user=user)
 

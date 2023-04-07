@@ -10,3 +10,6 @@ MONGODB_HOST = os.environ.get('MONGODB_HOST')
 MONGODB_USERNAME = os.environ.get('MONGODB_USERNAME')
 MONGODB_PASSWORD = os.environ.get('MONGODB_PASSWORD')
 MONGODB_DB_NAME = os.environ.get('MONGODB_DB_NAME')
+
+SECRET_KEY = os.environ.get('SECRET_KEY')
+ALGORITHM = 'HS256'
