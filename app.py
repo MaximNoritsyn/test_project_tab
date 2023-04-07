@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, abort, Response
+from flask import Flask, render_template, redirect, request, abort
 from settings import Telegram_bot_name, SECRET_KEY, ALGORITHM
 from database_connector import DatabaseConnector
 import jwt
