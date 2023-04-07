@@ -1,10 +1,12 @@
-# Telegram Registration Web App
+## Проект описує процес створення мінімального функціонального додатку на Flask.
+Цей проект зроблений на Flask. Застосунок пропонує два способи реєстрації - через телеграм бота та за допомогою Telegram Login Widget.
 
-This is a mini web application built using Django or Flask that allows users to register through a Telegram bot and displays information about the user. 
+У проекті було реалізовано кнопку для редіректу до телеграм бота @testtaskregistrationnoritsynbot. Бот збирає дані логіна, пароля та його повторення. Пароль хешується для збереження безпеки, а з чату видаляється.
 
-## Features
+Для збереження даних було використано базу даних MongoDB.
 
-- Users can register through the Telegram bot.
-- User information is stored.
-- Users can log in to their account on the website.
-- User's Telegram account information is displayed on their account page.
+У завданні не було чітко визначено, як потрібно реалізувати логін на сайт. Оскільки Telegram Login Widget забезпечує безпечніше логування за допомогою автентифікації з Telegram, я вирішив використати саме цей метод. Телеграм бот залишився як альтернативний варіант розвитку проекту, до которого потрібно зробити сторінку входу за логіном та паролем
+
+Після логування, перехід йде до GET запиту, де зберігаються дані користувача Telegram. Доступ до сторінки /profile можливий тільки з використанням access_token, який зберігається в cookie.
+
+Проект було розгорнуто на Heroku з двома процесами: web - це Flask, а worker - це телеграм бот. Наразі бот не використовується в проекті, але залишився як інший варіант реєстрації за допомогою пароля.
