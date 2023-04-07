@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профіль користувача</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Профіль користувача</h1>
+
+    <div class="profile-card">
+    <img src="{{ user.photo_url }}" alt="Фото профілю" class="profile-photo">
+    <div class="profile-name">{{ user.first_name }} {{ user.last_name }}</div>
+
+    <table class="profile-info-table">
+        <tr>
+            <th>Інформація про користувача</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Ім'я:</td>
+            <td>{{ user.first_name }}</td>
+        </tr>
+        <tr>
+            <td>Прізвище:</td>
+            <td>{{ user.last_name }}</td>
+        </tr>
+        <tr>
+            <td>Ім'я користувача:</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>Telegram ID:</td>
+            <td>{{ user.telegram_id }}</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
